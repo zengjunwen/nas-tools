@@ -429,9 +429,11 @@ class Scraper:
                 log.info(f"【Scraper】{itype}图片已保存：{image_path}")
             else:
                 log.info(f"【Scraper】{itype}图片下载失败，请检查网络连通性")
-        except RequestException:
-            raise RequestException
+        except RequestException as req_err:
+            log.error(f"【Scraper】请求异常：{req_err}")
+            raise req_err  # 重新抛出异常以便于上层处理
         except Exception as err:
+            log.error(f"【Scraper】发生异常：{err}")  # 打印异常信息
             ExceptionUtils.exception_traceback(err)
 
     def __save_nfo(self, doc, out_file):

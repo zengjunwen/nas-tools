@@ -160,8 +160,8 @@ class SystemUtils:
         硬链接
         """
         try:
-            if platform.release().find("-z4-") >= 0:
-                # 兼容极空间Z4
+            if platform.release().find("-z4") >= 0:
+                # 兼容极空间Z4、Z4Pro
                 tmp = os.path.normpath(os.path.join(PathUtils.get_parent_paths(dest, 2),
                                                     os.path.basename(dest)))
                 os.link(os.path.normpath(src), tmp)
